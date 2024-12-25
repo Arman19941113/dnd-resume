@@ -1,4 +1,4 @@
-import { TiptapEditor } from '@/components/tiptap/tiptap-editor.tsx'
+import { TiptapEditor, TiptapRef } from '@/components/tiptap/tiptap-editor.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import {
   Dialog,
@@ -10,7 +10,6 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog.tsx'
 import type { TextContentData } from '@/components/widgets/widgets-type.d.ts'
-import type { Editor } from '@tiptap/react'
 import { useRef, useState } from 'react'
 
 const TextContentForm = ({
@@ -21,11 +20,6 @@ const TextContentForm = ({
   onChange: (value: TextContentData) => void
 }) => {
   const { propsData } = data
-
-  const editor = useRef<Editor | null>(null)
-  const handleEditorCreated = (val: Editor) => {
-    editor.current = val
-  }
 
   const [content, setContent] = useState('')
   const [open, setOpen] = useState<boolean>(false)
@@ -38,13 +32,15 @@ const TextContentForm = ({
       setContent('')
     }
   }
+  const editorRef: TiptapRef = useRef(null)
   const handleSave = () => {
-    if (editor.current) {
+    if (editorRef.current) {
+      const content = editorRef.current.getHTML()
       onChange({
         ...data,
         propsData: {
           ...propsData,
-          content: editor.current.getHTML(),
+          content,
         },
       })
     }
@@ -86,8 +82,8 @@ const TextContentForm = ({
             {/* 富文本编辑器 */}
             <div className="h-[320px]">
               <TiptapEditor
+                ref={editorRef}
                 content={content}
-                onCreate={handleEditorCreated}
               />
             </div>
             <DialogFooter>

@@ -1,26 +1,29 @@
 import { TiptapMenu } from '@/components/tiptap/tiptap-memu.tsx'
 import Link from '@tiptap/extension-link'
-import type { Editor } from '@tiptap/react'
 import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
-import type { MouseEvent } from 'react'
+import type { MouseEvent, Ref } from 'react'
+import { useImperativeHandle } from 'react'
 import '@/components/tiptap/tiptap.css'
 
 const extensions = [StarterKit, Link]
 
+export type TiptapRef = Ref<{
+  getHTML: () => string
+}>
+
 interface TiptapProps {
+  ref: TiptapRef
   content: string
-  onCreate: (editor: Editor) => void
 }
 
-const TiptapEditor = ({ content, onCreate }: TiptapProps) => {
+const TiptapEditor = ({ content, ref }: TiptapProps) => {
   const editor = useEditor({
     extensions,
     content,
     onCreate: ({ editor }) => {
       const lastPosition = editor.state.doc.content.size
       editor.chain().focus().setTextSelection(lastPosition).run()
-      onCreate(editor)
     },
   })
 
@@ -30,6 +33,12 @@ const TiptapEditor = ({ content, onCreate }: TiptapProps) => {
       editor.chain().focus().setTextSelection(lastPosition).run()
     }
   }
+
+  useImperativeHandle(ref, () => {
+    return {
+      getHTML: () => editor?.getHTML() || '',
+    }
+  }, [editor])
 
   return (
     <div

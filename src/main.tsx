@@ -25,6 +25,10 @@ createRoot(document.getElementById('root')!).render(
           path="/preview"
           element={<PagePreview />}
         />
+        <Route 
+          path="/preview/:filename"
+          element={<PagePreview />}
+        />
       </Routes>
       <Analytics />
     </BrowserRouter>

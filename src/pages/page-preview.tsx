@@ -9,11 +9,38 @@ import { getBasename } from '@/components/widgets/widgets-util.ts'
 import { decodeFromBase64Url } from '@/lib/utils'
 import { useWidgetsStore } from '@/store/widgets-store.ts'
 import { useEffect } from 'react'
-import { useNavigate, useSearchParams } from 'react-router'
+import { useNavigate, useSearchParams, useParams } from 'react-router'
 import { toast } from 'sonner'
 
 const PagePreview = () => {
+  const { filename } = useParams()
   let widgets = useWidgetsStore(state => state.widgets)
+  
+  // 从文件读取数据
+  useEffect(() => {
+    const fetchContent = async () => {
+      try {
+        const response = await fetch(`/resumes/${filename}`)
+        const base64Content = await response.text()
+        const json = decodeFromBase64Url(base64Content.trim())
+        const ret = widgetsSchema.safeParse(JSON.parse(json))
+        if (ret.success) {
+          widgets = ret.data
+        } else {
+          console.error(ret.error)
+          toast.error('文件解析失败')
+        }
+      } catch (error) {
+        console.error(error)
+        toast.error('文件加载失败')
+      }
+    }
+
+    if (filename) {
+      fetchContent()
+    }
+  }, [filename])
+
   /**
    * Get widgets data from the URL query string.
    */

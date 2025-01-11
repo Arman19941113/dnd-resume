@@ -72,6 +72,20 @@ const EditHeader = () => {
     })
   }
 
+  const handleExportBase64 = () => {
+    const base64 = encodeToBase64Url(JSON.stringify(widgets))
+    const blob = new Blob([base64], { type: 'text/plain' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = (getBasename(widgets) || 'resume') + '.txt'
+    a.click() 
+    URL.revokeObjectURL(url)
+    toast.success('成功导出 base64 文件', {
+      position: 'top-center',
+    })
+  }
+
   const handleClickPreview = () => {
     const base64 = encodeToBase64Url(JSON.stringify(widgets))
     navigate('/preview?data=' + base64)
@@ -116,6 +130,14 @@ const EditHeader = () => {
           onClick={handleClickExport}
         >
           导出配置
+        </Button>
+
+        <Button
+          variant="outline"
+          size="sm" 
+          onClick={handleExportBase64}
+        >
+          导出 base64
         </Button>
 
         <AlertDialog>

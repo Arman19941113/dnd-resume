@@ -9,7 +9,7 @@ import { getBasename } from '@/components/widgets/widgets-util.ts'
 import { decodeFromBase64Url } from '@/lib/utils'
 import { useWidgetsStore } from '@/store/widgets-store.ts'
 import { useEffect } from 'react'
-import { useNavigate, useSearchParams, useParams } from 'react-router-dom'
+import { useNavigate, useSearchParams, useParams } from 'react-router'
 import { toast } from 'sonner'
 
 const PagePreview = () => {

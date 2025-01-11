@@ -21,7 +21,7 @@ const PagePreview = () => {
   useEffect(() => {
     const fetchContent = async () => {
       try {
-        const response = await fetch(`/resumes/${filename}.txt`) // 添加.txt后缀
+        const response = await fetch(`/resumes/${filename}`)
         const base64Content = await response.text()
         const json = decodeFromBase64Url(base64Content.trim())
         const ret = widgetsSchema.safeParse(JSON.parse(json))

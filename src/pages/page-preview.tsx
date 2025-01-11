@@ -8,13 +8,12 @@ import type { WidgetNode } from '@/components/widgets/widgets-type.d.ts'
 import { getBasename } from '@/components/widgets/widgets-util.ts'
 import { decodeFromBase64Url } from '@/lib/utils'
 import { useWidgetsStore } from '@/store/widgets-store.ts'
-import { useEffect, useState } from 'react'
-import { useNavigate, useSearchParams, useParams } from 'react-router'
+import { useEffect } from 'react'
+import { useNavigate, useSearchParams, useParams } from 'react-router-dom'
 import { toast } from 'sonner'
 
 const PagePreview = () => {
   const { filename } = useParams()
-  const [fileWidgets, setFileWidgets] = useState<WidgetNode[]>([])
   let widgets = useWidgetsStore(state => state.widgets)
   
   // 从文件读取数据
@@ -26,7 +25,7 @@ const PagePreview = () => {
         const json = decodeFromBase64Url(base64Content.trim())
         const ret = widgetsSchema.safeParse(JSON.parse(json))
         if (ret.success) {
-          setFileWidgets(ret.data) // 使用 setState 更新状态
+          widgets = ret.data
         } else {
           console.error(ret.error)
           toast.error('文件解析失败')
@@ -41,9 +40,6 @@ const PagePreview = () => {
       fetchContent()
     }
   }, [filename])
-
-  // 优先使用文件数据
-  widgets = fileWidgets.length > 0 ? fileWidgets : widgets
 
   /**
    * Get widgets data from the URL query string.

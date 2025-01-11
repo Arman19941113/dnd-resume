@@ -92,9 +92,9 @@ const EditHeader = () => {
   }
 
   const handleClickPrint = () => {
-    // 使用 URL 参数标记打印模式
+    sessionStorage.setItem('PRINT', 'true')
     const base64 = encodeToBase64Url(JSON.stringify(widgets))
-    navigate('/preview?data=' + base64 + '&print=true')
+    navigate('/preview?data=' + base64)
   }
 
   return (

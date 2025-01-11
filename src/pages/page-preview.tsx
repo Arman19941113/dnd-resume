@@ -22,7 +22,12 @@ const PagePreview = () => {
       try {
         const response = await fetch(`/resumes/${filename}`)
         const base64Content = await response.text()
-        const json = decodeFromBase64Url(base64Content.trim())
+        const sanitizedContent = base64Content.trim()
+          .replace(/-/g, '+')
+          .replace(/_/g, '/')
+        const json = decodeURIComponent(atob(sanitizedContent).split('').map(function(c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+        }).join(''))
         const ret = widgetsSchema.safeParse(JSON.parse(json))
         if (ret.success) {
           widgets = ret.data

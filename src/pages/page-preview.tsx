@@ -14,7 +14,7 @@ import { toast } from 'sonner'
 
 const PagePreview = () => {
   const { filename } = useParams()
-  const [fileWidgets, setFileWidgets] = useState([])
+  const [fileWidgets, setFileWidgets] = useState<WidgetNode[]>([])
   let widgets = useWidgetsStore(state => state.widgets)
   
   // 从文件读取数据

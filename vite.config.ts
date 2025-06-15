@@ -9,7 +9,9 @@ export default defineConfig({
   define: {
     __DATE__: JSON.stringify(new Date().toISOString().slice(0, 10)),
   },
-
+  server: {
+    open: true,
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -26,6 +28,10 @@ export default defineConfig({
     sentryVitePlugin({
       org: 'arman-4n',
       project: 'dnd-resume',
+      applicationKey: 'dnd-resume',
+      sourcemaps: {
+        disable: process.env.SENTRY_AUTH_TOKEN ? false : true,
+      },
     }),
   ],
   build: {
@@ -47,6 +53,6 @@ export default defineConfig({
         },
       },
     },
-    sourcemap: true,
+    sourcemap: process.env.SENTRY_AUTH_TOKEN ? true : false,
   },
 })

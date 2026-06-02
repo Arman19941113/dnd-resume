@@ -1,12 +1,9 @@
-import { sentryVitePlugin } from '@sentry/vite-plugin'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react-swc'
 import path from 'path'
-import { defineConfig, loadEnv } from 'vite'
+import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 import { htmlPlugin } from './plugins/html-plugin.ts'
-
-const env = loadEnv(process.env.NODE_ENV!, process.cwd(), '')
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -34,16 +31,6 @@ export default defineConfig({
     react(),
     tailwindcss(),
     htmlPlugin(),
-    env.SENTRY_AUTH_TOKEN &&
-      sentryVitePlugin({
-        org: env.SENTRY_ORG,
-        project: env.SENTRY_PROJECT,
-        applicationKey: env.SENTRY_PROJECT,
-        sourcemaps: {
-          disable: env.SENTRY_AUTH_TOKEN ? false : true,
-          filesToDeleteAfterUpload: ['**/*.map'],
-        },
-      }),
     VitePWA({
       manifest: false,
       injectRegister: 'script-defer',
@@ -76,15 +63,10 @@ export default defineConfig({
               test: /\/react@19|\/react-dom|\/react-router/,
             },
             { name: 'vendor-tiptap', test: /\/@tiptap|\/prosemirror/ },
-            {
-              name: 'vendor-sentry',
-              test: /\/@sentry/,
-            },
             { name: 'vendor', test: /\/node_modules/ },
           ],
         },
       },
     },
-    sourcemap: env.SENTRY_AUTH_TOKEN ? 'hidden' : false,
   },
 })

@@ -9,18 +9,6 @@ export function htmlPlugin(): Plugin {
     transformIndexHtml(html: string) {
       let result = html
 
-      // vince
-      const vinceDomain = env.VINCE_DOMAIN
-      const vinceSource = env.VINCE_SOURCE
-      if (vinceDomain && vinceSource) {
-        result = result.replace(
-          /\{\{\s*VINCE\s*\}\}/g,
-          `<script defer data-domain="${vinceDomain}" src="${vinceSource}"></script>`,
-        )
-      } else {
-        result = result.replace(/\{\{\s*VINCE\s*\}\}/g, '')
-      }
-
       // react-scan
       const reactScan = env.REACT_SCAN
       if (reactScan) {

@@ -1,6 +1,4 @@
 onlyBuiltDependencies:
-  - '@sentry/cli'
   - '@swc/core'
   - '@tailwindcss/oxide'
-  - '@vercel/speed-insights'
   - esbuild

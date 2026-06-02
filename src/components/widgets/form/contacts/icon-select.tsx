@@ -2,19 +2,19 @@ import { useState } from 'react'
 
 import { Button } from '#ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '#ui/popover'
-import type { LinkIconNames } from '#widgets/types'
-import { linkIconNames } from '#widgets/types'
+import type { LinkIconName } from '#widgets/types'
+import { LINK_ICON_NAMES } from '#widgets/types'
 import { LinkIconComponent } from '#widgets/common'
 
 interface LinkIconSelectProps {
   value: string
-  onChange: (value: LinkIconNames) => void
+  onChange: (value: LinkIconName) => void
   className?: string
 }
 
 export function IconSelect({ value, onChange, className }: LinkIconSelectProps) {
   const [open, setOpen] = useState<boolean>(false)
-  const handleClickIcon = (name: LinkIconNames) => {
+  const handleClickIcon = (name: LinkIconName) => {
     onChange(name)
     setOpen(false)
   }
@@ -38,7 +38,7 @@ export function IconSelect({ value, onChange, className }: LinkIconSelectProps) 
         align="start"
       >
         <div className="flex flex-wrap justify-between">
-          {linkIconNames.map(name => (
+          {LINK_ICON_NAMES.map(name => (
             <Button
               key={name}
               variant="outline"

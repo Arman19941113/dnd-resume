@@ -60,7 +60,7 @@ export type ILinkGroupData = ILinkData[]
 export interface ILinkData {
   href: string
   content: string
-  icon: LinkIconNames
+  icon: LinkIconName
 }
 
 export interface ITitleSectionData {
@@ -94,7 +94,7 @@ export interface IImageSectionData {
   }
 }
 
-export const linkIconNames = [
+export const LINK_ICON_NAMES = [
   'cake',
   'location',
   'phone',
@@ -104,4 +104,4 @@ export const linkIconNames = [
   'mail',
   'gmail',
 ] as const
-export type LinkIconNames = (typeof linkIconNames)[number]
+export type LinkIconName = (typeof LINK_ICON_NAMES)[number]

@@ -2,7 +2,6 @@ import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react-swc'
 import path from 'path'
 import { defineConfig } from 'vite'
-import { VitePWA } from 'vite-plugin-pwa'
 import { htmlPlugin } from './plugins/html-plugin.ts'
 
 // https://vite.dev/config/
@@ -27,32 +26,7 @@ export default defineConfig({
       localsConvention: 'camelCaseOnly',
     },
   },
-  plugins: [
-    react(),
-    tailwindcss(),
-    htmlPlugin(),
-    VitePWA({
-      manifest: false,
-      injectRegister: 'script-defer',
-      registerType: 'autoUpdate',
-      workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,jpg,png,svg,webp}'],
-        runtimeCaching: [
-          {
-            urlPattern: ({ request }) => request.destination === 'image',
-            handler: 'StaleWhileRevalidate',
-            options: {
-              cacheName: 'images-cache',
-              expiration: {
-                maxEntries: 10,
-                maxAgeSeconds: 30 * 24 * 60 * 60,
-              },
-            },
-          },
-        ],
-      },
-    }),
-  ],
+  plugins: [react(), tailwindcss(), htmlPlugin()],
   build: {
     rollupOptions: {
       output: {

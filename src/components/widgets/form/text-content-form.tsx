@@ -37,8 +37,8 @@ export function TextContentForm({
   // edit rich text
   const [content, setContent] = useState('')
   const [open, setOpen] = useState<boolean>(false)
-  const handleOpenChange = (open: boolean) => {
-    if (open) {
+  const handleOpenChange = (nextOpen: boolean) => {
+    if (nextOpen) {
       setOpen(true)
       setContent(propsData.content)
     } else {

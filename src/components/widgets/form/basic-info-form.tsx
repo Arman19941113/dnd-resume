@@ -25,10 +25,10 @@ export function BasicInfoForm({
   const { t } = useTranslation()
   const { avatarUrl, avatarSize, avatarRound, name, jobTitle, linksGroup } = propsData
 
-  function handleChange<K extends keyof PropsData>(name: K, value: PropsData[K]) {
+  function handleChange<K extends keyof PropsData>(fieldName: K, value: PropsData[K]) {
     onChange({
       ...propsData,
-      [name]: value,
+      [fieldName]: value,
     })
   }
 

@@ -39,13 +39,15 @@ export function PanelDnd() {
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event
     if (!over) return
-    if (active.id !== over.id) {
-      const oldIndex = widgets.findIndex(item => item.id === active.id)
+    const activeId = String(active.id)
+    const overId = String(over.id)
+    if (activeId !== overId) {
+      const oldIndex = widgets.findIndex(item => item.id === activeId)
       if (oldIndex === -1) return
-      const newIndex = widgets.findIndex(item => item.id === over.id)
+      const newIndex = widgets.findIndex(item => item.id === overId)
       if (newIndex === -1) return
       setWidgets(arrayMove(widgets, oldIndex, newIndex))
-      setActiveId(active.id as string)
+      setActiveId(activeId)
     }
   }
 

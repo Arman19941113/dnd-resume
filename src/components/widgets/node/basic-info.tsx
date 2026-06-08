@@ -11,8 +11,8 @@ export function BasicInfo({ data }: BasicInfoProps) {
 
   const handleImgLoaded = () => {
     // change favicon to avatarUrl
-    const link = document.querySelector("link[rel*='icon']") as HTMLLinkElement
-    if (link) {
+    const link = document.querySelector("link[rel*='icon']")
+    if (link instanceof HTMLLinkElement) {
       link.href = avatarUrl
     }
   }

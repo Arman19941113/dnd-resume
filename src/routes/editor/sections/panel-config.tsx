@@ -75,8 +75,8 @@ export function PanelConfig() {
           />
         )
       default: {
-        const _exhaustiveCheck: never = activeWidget
-        return _exhaustiveCheck
+        const exhaustiveCheck: never = activeWidget
+        return exhaustiveCheck
       }
     }
   })()

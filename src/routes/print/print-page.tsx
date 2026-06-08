@@ -1,13 +1,7 @@
 import { useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router'
 
-import { BasicInfo } from '#widgets/node/basic-info'
-import { ExperienceTime } from '#widgets/node/experience-time'
-import { ImageSection } from '#widgets/node/image-section'
-import { TextContent } from '#widgets/node/text-content'
-import { TitleSection } from '#widgets/node/title-section'
-import type { IWidgetNode } from '#widgets/types'
-import { generateBasename } from '#widgets/helpers'
+import { generateBasename, renderWidgetNode } from '#widgets/helpers'
 import { useWidgetsStore } from '@/store'
 
 export function PrintPage() {
@@ -47,21 +41,6 @@ export function PrintPage() {
     }
   }, [navigate, widgets, searchParams])
 
-  function WidgetRenderComponent(item: IWidgetNode) {
-    switch (item.type) {
-      case 'BasicInfo':
-        return <BasicInfo data={item.data.propsData} />
-      case 'TitleSection':
-        return <TitleSection data={item.data.propsData} />
-      case 'ExperienceTime':
-        return <ExperienceTime data={item.data.propsData} />
-      case 'TextContent':
-        return <TextContent data={item.data.propsData} />
-      case 'ImageSection':
-        return <ImageSection data={item.data.propsData} />
-    }
-  }
-
   return (
     <div className="mx-auto w-[900px]">
       <ul className="widgets-container">
@@ -70,7 +49,7 @@ export function PrintPage() {
             key={item.id}
             className="flow-root"
           >
-            <div style={item.data.styleData}>{WidgetRenderComponent(item)}</div>
+            <div style={item.data.styleData}>{renderWidgetNode(item)}</div>
           </li>
         ))}
       </ul>

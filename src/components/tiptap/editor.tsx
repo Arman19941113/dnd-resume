@@ -22,9 +22,9 @@ export function TiptapEditor({ content, ref }: TiptapProps) {
   const editor = useEditor({
     extensions,
     content,
-    onCreate: ({ editor }) => {
-      const lastPosition = editor.state.doc.content.size
-      editor.chain().focus().setTextSelection(lastPosition).run()
+    onCreate: ({ editor: createdEditor }) => {
+      const lastPosition = createdEditor.state.doc.content.size
+      createdEditor.chain().focus().setTextSelection(lastPosition).run()
     },
   })
 

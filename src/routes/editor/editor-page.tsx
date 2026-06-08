@@ -26,7 +26,7 @@ export function EditorPage() {
   }, [])
 
   return (
-    <div className="h-[100vh] min-w-[900px]">
+    <div className="h-screen min-w-[900px]">
       <EditHeader />
       <div className="flex h-[calc(100%-52px)]">
         {/* left materials panel */}

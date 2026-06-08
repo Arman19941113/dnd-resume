@@ -11,6 +11,7 @@ export default defineConfig({
     suspicious: 'warn',
   },
   rules: {
+    'no-underscore-dangle': ['warn', { allow: ['__DATE__'] }],
     'typescript/consistent-type-imports': 'error',
     'typescript/no-explicit-any': 'off',
   },

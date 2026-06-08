@@ -37,4 +37,5 @@ export function generateBasename(widgets: IWidgetNode[]) {
 }
 
 export * from './factory'
+export * from './render-widget-node'
 export * from './schema'

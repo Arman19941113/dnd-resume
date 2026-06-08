@@ -59,8 +59,8 @@ function IconRenderComponent({ name }: { name: IconName }) {
     case 'ordered-list':
       return <ListOrdered size={size} />
     default: {
-      const _exhaustiveCheck: never = name
-      return _exhaustiveCheck
+      const exhaustiveCheck: never = name
+      return exhaustiveCheck
     }
   }
 }

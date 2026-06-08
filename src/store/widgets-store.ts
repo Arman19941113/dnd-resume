@@ -9,7 +9,7 @@ export interface WidgetsState {
   addWidget: (widget: IWidgetNode) => void
   removeWidget: (id: string) => void
   updateWidget: (widget: IWidgetNode) => void
-  setWidgets: (widgets: IWidgetNode[]) => void
+  setWidgets: (nextWidgets: IWidgetNode[]) => void
   resetWidgets: () => void
 
   activeId: string | null
@@ -17,18 +17,19 @@ export interface WidgetsState {
 }
 
 export const useWidgetsStore = create<WidgetsState>()(set => {
-  const widgets = getWidgets()
-  const activeId = widgets.length ? widgets[0].id : null
+  const initialWidgets = getWidgets()
+  const initialActiveId = initialWidgets.length ? initialWidgets[0].id : null
 
   return {
-    widgets,
+    widgets: initialWidgets,
     addWidget: (widget: IWidgetNode) => {
-      set(({ activeId, widgets }) => {
-        const newWidgets = [...widgets]
-        if (!activeId) {
+      set(state => {
+        const { activeId: currentActiveId, widgets: currentWidgets } = state
+        const newWidgets = [...currentWidgets]
+        if (!currentActiveId) {
           newWidgets.push(widget)
         } else {
-          const index = widgets.findIndex(item => item.id === activeId)
+          const index = currentWidgets.findIndex(item => item.id === currentActiveId)
           if (index === -1) {
             newWidgets.push(widget)
           } else {
@@ -42,10 +43,11 @@ export const useWidgetsStore = create<WidgetsState>()(set => {
       })
     },
     removeWidget: (id: string) => {
-      set(({ widgets }) => {
-        const index = widgets.findIndex(item => item.id === id)
-        const newWidgets = widgets.filter(widget => widget.id !== id)
-        const activeId =
+      set(state => {
+        const { widgets: currentWidgets } = state
+        const index = currentWidgets.findIndex(item => item.id === id)
+        const newWidgets = currentWidgets.filter(widget => widget.id !== id)
+        const nextActiveId =
           newWidgets.length === 0
             ? null // Last one deleted
             : newWidgets.length > index
@@ -55,25 +57,26 @@ export const useWidgetsStore = create<WidgetsState>()(set => {
                 : null
         return {
           widgets: newWidgets,
-          activeId,
+          activeId: nextActiveId,
         }
       })
     },
     updateWidget: (widget: IWidgetNode) => {
-      set(({ widgets }) => {
+      set(state => {
+        const { widgets: currentWidgets } = state
         return {
-          widgets: widgets.map(item => (item.id === widget.id ? widget : item)),
+          widgets: currentWidgets.map(item => (item.id === widget.id ? widget : item)),
         }
       })
     },
-    setWidgets: (widgets: IWidgetNode[]) => {
-      set({ widgets })
+    setWidgets: (nextWidgets: IWidgetNode[]) => {
+      set({ widgets: nextWidgets })
     },
     resetWidgets: () => {
       set({ widgets: [], activeId: null })
     },
 
-    activeId,
+    activeId: initialActiveId,
     setActiveId: (id: string) => set({ activeId: id }),
   }
 })

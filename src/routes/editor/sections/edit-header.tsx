@@ -33,9 +33,13 @@ export function EditHeader() {
     const file = event.target.files?.[0]
     if (file) {
       const reader = new FileReader()
-      reader.onload = e => {
+      reader.addEventListener('load', e => {
         try {
-          const text = e.target?.result as string
+          const { result } = e.target ?? {}
+          if (typeof result !== 'string') {
+            throw new Error('Imported config is not text')
+          }
+          const text = result
           const ret = widgetsSchema.safeParse(JSON.parse(text))
           if (ret.success) {
             const importedWidgets = ret.data
@@ -49,7 +53,7 @@ export function EditHeader() {
           console.warn('Import config parse error', error)
           toast.error(t('message.parseError'))
         }
-      }
+      })
       reader.readAsText(file)
       event.target.value = ''
     }

@@ -1,5 +1,5 @@
 import tailwindcss from '@tailwindcss/vite'
-import react from '@vitejs/plugin-react-swc'
+import react from '@vitejs/plugin-react'
 import path from 'path'
 import { defineConfig } from 'vite'
 import { htmlPlugin } from './plugins/html-plugin.ts'
@@ -28,15 +28,22 @@ export default defineConfig({
   },
   plugins: [react(), tailwindcss(), htmlPlugin()],
   build: {
-    rollupOptions: {
+    rolldownOptions: {
       output: {
-        advancedChunks: {
+        codeSplitting: {
           groups: [
             {
               name: 'vendor-react',
-              test: /\/react@19|\/react-dom|\/react-router/,
+              test: /\/node_modules\/(?:react|react-dom|react-router|use-sync-external-store)\//,
             },
-            { name: 'vendor-tiptap', test: /\/@tiptap|\/prosemirror/ },
+            {
+              name: 'vendor-tiptap',
+              test: /\/node_modules\/(?:@tiptap|prosemirror-[^/]+)\//,
+            },
+            {
+              name: 'vendor-ui',
+              test: /\/node_modules\/(?:@dnd-kit|@radix-ui|radix-ui)\//,
+            },
             { name: 'vendor', test: /\/node_modules/ },
           ],
         },

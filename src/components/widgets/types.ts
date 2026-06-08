@@ -1,4 +1,4 @@
-import type { JSX } from 'react'
+import type { CSSProperties, JSX } from 'react'
 
 export type WidgetType =
   | 'BasicInfo'
@@ -40,7 +40,7 @@ export type IWidgetNode =
       data: IImageSectionData
     }
 
-export interface IStyleData {
+export interface IStyleData extends CSSProperties {
   marginTop: number
   marginBottom: number
 }

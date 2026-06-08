@@ -68,11 +68,11 @@ export function EditHeader() {
 
   const handleClickView = () => {
     const base64 = encodeText(JSON.stringify(widgets))
-    navigate('/view?data=' + base64)
+    void navigate('/view?data=' + base64)
   }
 
   const handleClickPrint = () => {
-    navigate('/print?print=true')
+    void navigate('/print?print=true')
   }
 
   return (

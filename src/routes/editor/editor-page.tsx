@@ -40,7 +40,7 @@ export function EditorPage() {
               <SelectTrigger className="w-full">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent position="popper">
                 <SelectItem value="en">
                   <span>🇺🇸</span>English
                 </SelectItem>

@@ -32,7 +32,7 @@ export function PrintPage() {
           'afterprint',
           () => {
             document.title = originalTitle
-            navigate(-1)
+            void navigate(-1)
           },
           { once: true },
         )

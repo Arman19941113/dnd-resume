@@ -6,7 +6,7 @@ import { storageService } from '@/services/storage'
 import en from './en.json'
 import zh from './zh.json'
 
-i18n
+void i18n
   .use(initReactI18next)
   .init({
     resources: {
@@ -32,7 +32,7 @@ i18n
   })
 
 export function setLanguage(lang: 'en' | 'zh') {
-  i18n.changeLanguage(lang).then(() => {
+  void i18n.changeLanguage(lang).then(() => {
     applyLanguageToDocument(lang)
     storageService.setLanguage(lang)
   })

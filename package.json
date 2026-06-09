@@ -28,6 +28,7 @@
     "@dnd-kit/modifiers": "^9.0.0",
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",
+    "@sentry/react": "10.56.0",
     "@tiptap/pm": "^3.25.0",
     "@tiptap/react": "^3.25.0",
     "@tiptap/starter-kit": "^3.25.0",
@@ -52,6 +53,7 @@
     "zustand": "^5.0.14"
   },
   "devDependencies": {
+    "@sentry/vite-plugin": "5.3.0",
     "@tailwindcss/vite": "^4.3.0",
     "@types/node": "^25.9.1",
     "@types/pako": "^2.0.4",

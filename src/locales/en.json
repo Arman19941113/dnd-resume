@@ -18,6 +18,9 @@
     "storageIsDisabled": "Local Storage Disabled",
     "storageIsDisabledDesc": "Your browser has disabled local storage, which may prevent some features from working correctly. Please check your browser settings to enable it."
   },
+  "editor": {
+    "pageBreakHint": "Page {{page}}"
+  },
   "widgets": {
     "basicInfo": "Basic Info",
     "title": "Title",

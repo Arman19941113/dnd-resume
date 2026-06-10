@@ -18,6 +18,9 @@
     "storageIsDisabled": "本地存储不可用",
     "storageIsDisabledDesc": "您的浏览器已禁用本地存储，这可能导致部分功能无法正常使用。请检查浏览器设置以启用它。"
   },
+  "editor": {
+    "pageBreakHint": "第 {{page}} 页"
+  },
   "widgets": {
     "basicInfo": "基本信息",
     "title": "标题",

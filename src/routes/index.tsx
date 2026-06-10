@@ -5,10 +5,15 @@ import { ViewPage } from '@/routes/view/view-page'
 import { PrintPage } from '@/routes/print/print-page'
 import { NotFoundPage } from '@/routes/not-found/not-found-page'
 
+function RouterHydrateFallback() {
+  return null
+}
+
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <RootLayout />,
+    HydrateFallback: RouterHydrateFallback,
     children: [
       {
         index: true,

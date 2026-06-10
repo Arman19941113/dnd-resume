@@ -9,10 +9,12 @@ import { htmlPlugin } from './plugins/html-plugin.ts'
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
   const enableSentry = Boolean(env.SENTRY_AUTH_TOKEN)
+  const buildDate = new Date().toISOString().slice(0, 10)
+  const sentryRelease = env.SENTRY_RELEASE || `dnd-${buildDate}`
 
   return {
     define: {
-      __DATE__: JSON.stringify(new Date().toISOString().slice(0, 10)),
+      __SENTRY_RELEASE__: JSON.stringify(sentryRelease),
     },
     server: {
       open: true,
@@ -41,6 +43,9 @@ export default defineConfig(({ mode }) => {
           project: env.SENTRY_PROJECT,
           authToken: env.SENTRY_AUTH_TOKEN,
           applicationKey: 'dnd-resume',
+          release: {
+            name: sentryRelease,
+          },
           sourcemaps: {
             ignore: ['**/rolldown-runtime-*.js'],
             filesToDeleteAfterUpload: ['**/*.map'],

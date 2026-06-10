@@ -5,7 +5,7 @@ if (import.meta.env.VITE_SENTRY_DSN) {
   Sentry.init({
     dsn: import.meta.env.VITE_SENTRY_DSN,
     environment: import.meta.env.MODE,
-    release: 'dnd-' + __DATE__,
+    release: __SENTRY_RELEASE__,
     ignoreErrors: ['ResizeObserver loop limit exceeded'],
     integrations: [
       // Captures navigation, page-load, and request performance spans.

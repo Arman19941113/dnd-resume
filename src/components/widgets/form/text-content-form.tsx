@@ -1,5 +1,5 @@
 import { UserPen } from 'lucide-react'
-import { useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import type { TiptapRef } from '#tiptap/editor'
@@ -15,6 +15,7 @@ import {
   DialogTrigger,
 } from '#ui/dialog'
 import type { ITextContentData } from '#widgets/types'
+import { onTextContentEdit } from '@/lib/text-content-edit-event'
 
 type PropsData = ITextContentData['propsData']
 
@@ -37,15 +38,18 @@ export function TextContentForm({
   // edit rich text
   const [content, setContent] = useState('')
   const [open, setOpen] = useState<boolean>(false)
-  const handleOpenChange = (nextOpen: boolean) => {
-    if (nextOpen) {
-      setOpen(true)
-      setContent(propsData.content)
-    } else {
-      setOpen(false)
-      setContent('')
-    }
-  }
+  const handleOpenChange = useCallback(
+    (nextOpen: boolean) => {
+      if (nextOpen) {
+        setOpen(true)
+        setContent(propsData.content)
+      } else {
+        setOpen(false)
+        setContent('')
+      }
+    },
+    [propsData.content],
+  )
   const editorRef: TiptapRef = useRef(null)
   const handleSave = () => {
     if (editorRef.current) {
@@ -53,6 +57,10 @@ export function TextContentForm({
     }
     handleOpenChange(false)
   }
+
+  useEffect(() => {
+    return onTextContentEdit(() => handleOpenChange(true))
+  }, [handleOpenChange])
 
   return (
     <div>

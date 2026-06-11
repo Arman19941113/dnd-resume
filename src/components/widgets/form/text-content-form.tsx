@@ -38,24 +38,34 @@ export function TextContentForm({
   // edit rich text
   const [content, setContent] = useState('')
   const [open, setOpen] = useState<boolean>(false)
+  const initialContentRef = useRef('')
   const handleOpenChange = useCallback(
     (nextOpen: boolean) => {
       if (nextOpen) {
         setOpen(true)
         setContent(propsData.content)
+        initialContentRef.current = ''
       } else {
         setOpen(false)
         setContent('')
+        initialContentRef.current = ''
       }
     },
     [propsData.content],
   )
   const editorRef: TiptapRef = useRef(null)
+  const handleEditorReady = useCallback((nextContent: string) => {
+    initialContentRef.current = nextContent
+  }, [])
   const handleSave = () => {
     if (editorRef.current) {
       handleChange('content', editorRef.current.getHTML())
     }
     handleOpenChange(false)
+  }
+  const hasContentChanged = () => {
+    if (!editorRef.current) return false
+    return editorRef.current.getHTML() !== (initialContentRef.current || content)
   }
 
   useEffect(() => {
@@ -87,7 +97,11 @@ export function TextContentForm({
 
           <DialogContent
             className="sm:min-w-[600px] lg:min-w-[800px]"
-            onEscapeKeyDown={e => e.preventDefault()}
+            onEscapeKeyDown={e => {
+              if (hasContentChanged()) {
+                e.preventDefault()
+              }
+            }}
           >
             <DialogHeader>
               <DialogTitle>{t('form.textContent')}</DialogTitle>
@@ -99,6 +113,7 @@ export function TextContentForm({
               <TiptapEditor
                 ref={editorRef}
                 content={content}
+                onReady={handleEditorReady}
               />
             </div>
             <DialogFooter>

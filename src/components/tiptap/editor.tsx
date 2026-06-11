@@ -16,15 +16,17 @@ export type TiptapRef = Ref<{
 interface TiptapProps {
   ref: TiptapRef
   content: string
+  onReady?: (content: string) => void
 }
 
-export function TiptapEditor({ content, ref }: TiptapProps) {
+export function TiptapEditor({ content, ref, onReady }: TiptapProps) {
   const editor = useEditor({
     extensions,
     content,
     onCreate: ({ editor: createdEditor }) => {
       const lastPosition = createdEditor.state.doc.content.size
       createdEditor.chain().focus().setTextSelection(lastPosition).run()
+      onReady?.(createdEditor.getHTML())
     },
   })
 

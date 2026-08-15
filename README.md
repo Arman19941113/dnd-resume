@@ -14,7 +14,7 @@
   <img src=".github/4.png" alt="print" height="400">
 
   <h2>Project Growth</h2>
-  <a href="https://star-history.com/#Arman19941113/dnd-resume&Date">
-    <img src="https://api.star-history.com/svg?repos=Arman19941113/dnd-resume&type=Date" alt="star-history">
+  <a href="https://star-history.dera.page/#Arman19941113/dnd-resume&Date">
+    <img src="https://star-history.dera.page/svg?repos=Arman19941113/dnd-resume&type=Date" alt="star-history">
   </a>
 </div>

@@ -20,6 +20,18 @@ export function htmlPlugin(): Plugin {
         result = result.replace(/\{\{\s*REACT_SCAN\s*\}\}/g, '')
       }
 
+      // vince
+      const vinceSource = env.VINCE_SOURCE
+      const vinceDomain = env.VINCE_DOMAIN
+      if (vinceSource && vinceDomain) {
+        result = result.replace(
+          /\{\{\s*VINCE\s*\}\}/g,
+          `<script defer src="${vinceSource}" data-domain="${vinceDomain}"></script>`,
+        )
+      } else {
+        result = result.replace(/\{\{\s*VINCE\s*\}\}/g, '')
+      }
+
       return result
     },
   }

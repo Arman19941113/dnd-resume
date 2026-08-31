@@ -26,6 +26,8 @@
     "@tiptap/pm": "^3.34.0",
     "@tiptap/react": "^3.34.0",
     "@tiptap/starter-kit": "^3.34.0",
+    "@vercel/analytics": "^2.0.1",
+    "@vercel/speed-insights": "^2.1.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "i18next": "^27.1.1",

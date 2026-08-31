@@ -208,6 +208,12 @@ importers:
       '@tiptap/starter-kit':
         specifier: ^3.34.0
         version: 3.34.0
+      '@vercel/analytics':
+        specifier: ^2.0.1
+        version: 2.0.1(react@19.3.1)
+      '@vercel/speed-insights':
+        specifier: ^2.1.0
+        version: 2.1.0(react@19.3.1)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -1758,6 +1764,61 @@ packages:
     engines: {node: '>=16.20.0'}
     cpu: [x64]
     os: [win32]
+
+  '@vercel/analytics@2.0.1':
+    resolution: {integrity: sha512-MTQG6V9qQrt1tsDeF+2Uoo5aPjqbVPys1xvnIftXSJYG2SrwXRHnqEvVoYID7BTruDz4lCd2Z7rM1BdkUehk2g==}
+    peerDependencies:
+      '@remix-run/react': ^2
+      '@sveltejs/kit': ^1 || ^2
+      next: '>= 13'
+      nuxt: '>= 3'
+      react: ^18 || ^19 || ^19.0.0-rc
+      svelte: '>= 4'
+      vue: ^3
+      vue-router: ^4
+    peerDependenciesMeta:
+      '@remix-run/react':
+        optional: true
+      '@sveltejs/kit':
+        optional: true
+      next:
+        optional: true
+      nuxt:
+        optional: true
+      react:
+        optional: true
+      svelte:
+        optional: true
+      vue:
+        optional: true
+      vue-router:
+        optional: true
+
+  '@vercel/speed-insights@2.1.0':
+    resolution: {integrity: sha512-tkDiIEjjmlwPpTFnOK14hBhsRLMo5yoCeK2Er3AHWlL7WTzHgFSyItps3TOW0HukErUlYlaUeHiVLCyfiE4WAA==}
+    peerDependencies:
+      '@sveltejs/kit': ^1 || ^2 || ^3 || ^3.0.0-next.0
+      next: '>= 13'
+      nuxt: '>= 3'
+      react: ^18 || ^19 || ^19.0.0-rc
+      svelte: '>= 4'
+      vue: ^3
+      vue-router: ^4
+    peerDependenciesMeta:
+      '@sveltejs/kit':
+        optional: true
+      next:
+        optional: true
+      nuxt:
+        optional: true
+      react:
+        optional: true
+      svelte:
+        optional: true
+      vue:
+        optional: true
+      vue-router:
+        optional: true
 
   '@vitejs/plugin-react@6.3.0':
     resolution: {integrity: sha512-H9E955aVvD2F4zNHCw4eIZbIfF6xKldlh7MNu+hSU7xwQzh65lI/N+CJWqmfhi0PEjDXIt/H7T7J/4wU63KJiw==}
@@ -3992,6 +4053,14 @@ snapshots:
 
   '@typescript/typescript-win32-x64@7.0.2':
     optional: true
+
+  '@vercel/analytics@2.0.1(react@19.3.1)':
+    optionalDependencies:
+      react: 19.3.1
+
+  '@vercel/speed-insights@2.1.0(react@19.3.1)':
+    optionalDependencies:
+      react: 19.3.1
 
   '@vitejs/plugin-react@6.3.0(@voidzero-dev/vite-plus-core@1.6.0(@types/node@26.6.6)(jiti@2.7.0)(terser@5.42.0)(typescript@7.0.2)(yaml@2.9.0))':
     dependencies:

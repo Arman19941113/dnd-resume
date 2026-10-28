@@ -14,3 +14,9 @@
 你还可以使用 **导入配置** 和 **导出配置** 来备份简历配置，或在不同浏览器之间迁移配置。
 
 <img src=".github/assets/shot-zh-cn.jpg" alt="dnd-resume">
+
+## Stars 趋势
+
+<a href="https://star-history.com/#Arman19941113/dnd-resume&Date">
+  <img src="https://api.star-history.com/svg?repos=Arman19941113/dnd-resume&type=Date" alt="star-history">
+</a>

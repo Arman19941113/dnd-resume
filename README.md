@@ -16,3 +16,9 @@ You can also use **Import Config** and **Export Config** to back up or move
 your resume configuration.
 
 <img src=".github/assets/shot-en.jpg" alt="dnd-resume">
+
+## Star History
+
+<a href="https://star-history.com/#Arman19941113/dnd-resume&Date">
+  <img src="https://api.star-history.com/svg?repos=Arman19941113/dnd-resume&type=Date" alt="star-history">
+</a>

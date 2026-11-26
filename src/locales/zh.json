@@ -1,8 +1,9 @@
 {
   "common": {
-    "importConfig": "导入配置",
-    "exportConfig": "导出配置",
+    "importConfig": "导入",
+    "exportConfig": "导出",
     "reset": "重置",
+    "interfaceLanguage": "界面语言",
     "view": "查看",
     "print": "打印",
     "save": "保存",

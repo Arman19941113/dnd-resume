@@ -1,8 +1,9 @@
 {
   "common": {
-    "importConfig": "Import Config",
-    "exportConfig": "Export Config",
+    "importConfig": "Import",
+    "exportConfig": "Export",
     "reset": "Reset",
+    "interfaceLanguage": "Interface language",
     "view": "View",
     "print": "Print",
     "save": "Save",

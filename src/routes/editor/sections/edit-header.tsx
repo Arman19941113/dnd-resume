@@ -16,12 +16,14 @@ import {
   AlertDialogTrigger,
 } from '#ui/alert-dialog'
 import { Button } from '#ui/button'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '#ui/select'
 import { generateBasename, widgetsSchema } from '#widgets/helpers'
 import { encodeText } from '@/lib/codec'
+import { setLanguage } from '@/locales/i18n'
 import { useWidgetsStore } from '@/store'
 
 export function EditHeader() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const widgets = useWidgetsStore(state => state.widgets)
   const resetWidgets = useWidgetsStore(state => state.resetWidgets)
   const setWidgets = useWidgetsStore(state => state.setWidgets)
@@ -80,12 +82,12 @@ export function EditHeader() {
   }
 
   return (
-    <div className="flex h-[52px] items-center justify-between border-b px-6">
+    <div className="grid h-[52px] grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center border-b px-6">
       {/* github */}
       <a
         href="https://github.com/Arman19941113/dnd-resume"
         target="_blank"
-        className="flex-center"
+        className="flex-center justify-self-start"
       >
         <LogoGithub
           width={20}
@@ -138,9 +140,10 @@ export function EditHeader() {
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
-      </div>
-
-      <div className="flex-center gap-4">
+        <span
+          aria-hidden="true"
+          className="h-5 w-px bg-border"
+        />
         <Button
           variant="outline"
           size="sm"
@@ -154,6 +157,31 @@ export function EditHeader() {
         >
           {t('common.print')}
         </Button>
+      </div>
+
+      <div className="justify-self-end">
+        <Select
+          value={i18n.language}
+          onValueChange={setLanguage}
+        >
+          <SelectTrigger
+            className="w-[167px]"
+            aria-label={t('common.interfaceLanguage')}
+          >
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent
+            position="popper"
+            align="end"
+          >
+            <SelectItem value="en">
+              <span aria-hidden="true">🇺🇸</span>English
+            </SelectItem>
+            <SelectItem value="zh">
+              <span aria-hidden="true">🇨🇳</span>中文
+            </SelectItem>
+          </SelectContent>
+        </Select>
       </div>
     </div>
   )

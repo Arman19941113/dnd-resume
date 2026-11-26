@@ -28,8 +28,20 @@ export function EditorPage() {
       <EditHeader />
       <div className="flex h-[calc(100%-52px)]">
         {/* left materials panel */}
-        <div className="scroll-thin h-full w-[200px] shrink-0 overflow-y-auto border-r">
-          <PanelMaterials />
+        <div className="flex h-full w-[200px] shrink-0 flex-col border-r">
+          <div className="scroll-thin min-h-0 flex-1 overflow-y-auto">
+            <PanelMaterials />
+          </div>
+          <footer className="text-muted-foreground shrink-0 border-t px-4 py-2 text-center text-xs">
+            <a
+              href="https://beian.miit.gov.cn/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:underline"
+            >
+              渝ICP备2025063511号-1
+            </a>
+          </footer>
         </div>
         {/* center dnd panel */}
         <div className="flex grow justify-center bg-zinc-50 p-4">
